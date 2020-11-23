@@ -32,6 +32,10 @@
 //! }
 //! ```
 
+#[macro_use]
+extern crate log;
+extern crate log4rs;
+
 use std::fs::File;
 use std::io::{Read, Seek, SeekFrom};
 use std::path::Path;
@@ -58,7 +62,7 @@ mod exifreadable;
 /// Prints warnings to stderr.
 pub fn parse_buffer(contents: &[u8]) -> ExifResult {
     let (res, warnings) = parse_buffer_quiet(contents);
-    warnings.into_iter().for_each(|w| eprintln!("{}", w));
+    warnings.into_iter().for_each(|w| warn!("{}", w));
     res
 }
 
